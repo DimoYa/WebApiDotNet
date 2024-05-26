@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using MyProduct.Data.DTO;
 using MyProduct.Data.Models;
 using MyProduct.Data;
+using Microsoft.AspNetCore.Cors;
 
 namespace MyProduct.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [DisableCors]
     public class ProductsController : ControllerBase
     {
         private readonly AppDbContext _context;

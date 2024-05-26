@@ -1,8 +1,8 @@
-
 using Microsoft.EntityFrameworkCore;
 using MyProduct.Data;
 using MyProduct.Data.Models;
-using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MyProduct.Web
 {
@@ -45,8 +45,13 @@ namespace MyProduct.Web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+         
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles(); 
+            app.UseRouting(); 
+
+            app.UseCors();
 
             app.UseAuthorization();
 
