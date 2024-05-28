@@ -7,17 +7,21 @@ import { LandingComponent } from './features/pages/landing/landing.component';
 import { ProductListComponent } from './features/product/product-list/product-list.component';
 import { ProductItemComponent } from './features/product/product-item/product-item.component';
 import { provideHttpClient } from '@angular/common/http';
+import { ProductCreateComponent } from './features/product/product-create/product-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideHttpClient()

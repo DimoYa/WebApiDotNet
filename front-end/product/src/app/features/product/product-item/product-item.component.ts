@@ -1,15 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductService } from '../../../core/services/product.service';
+import { Subscription } from 'rxjs';
+import { ProductModel } from '../../../core/models/product-model';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.css']
 })
-export class ProductItemComponent implements OnInit {
-  @Input() product!: { id: number, name: string, price: number };
+export class ProductItemComponent {
+  @Input() product!: ProductModel;
+  @Output() productEmitter = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
+  deleteProduct(id: number): void {
+    this.productService.deleteProduct$(id).subscribe(() => {
+      this.productEmitter.emit();
+    });
   }
 }

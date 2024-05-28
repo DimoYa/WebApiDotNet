@@ -3,7 +3,7 @@
         <div class="col-12">
             <h2 class="mb-4">Products</h2>
             <div class="col-12" *ngFor="let product of products">
-                <app-product-item [product]="product"></app-product-item>
+                <app-product-item [product]="product" (productEmitter)="loadProducts()"></app-product-item>
               </div>
         </div>
     </div>

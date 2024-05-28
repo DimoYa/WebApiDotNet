@@ -1,12 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CreateProductModel, ProductModel } from '../models/product-model';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +20,21 @@ export class ProductService {
     // @Inject("BASE_URL") private baseUrl: string) { }
   ) {}
 
-  getProducts$(): Observable<Product[]> {
-    let products = this.http.get<Product[]>(this.productEndpoint);
+  getProducts$(): Observable<ProductModel[]> {
+    let products = this.http.get<ProductModel[]>(this.productEndpoint);
     return products;
   }
 
-  getProduct$(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.productEndpoint}/${id}`);
+  getProduct$(id: number): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.productEndpoint}/${id}`);
   }
 
-  createProduct$(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.productEndpoint}`, product);
+  createProduct$(product: CreateProductModel): Observable<CreateProductModel> {
+    return this.http.post<CreateProductModel>(`${this.productEndpoint}`, product);
   }
 
-  updateProduct$(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.productEndpoint}`, product);
+  updateProduct$(product: ProductModel): Observable<ProductModel> {
+    return this.http.put<ProductModel>(`${this.productEndpoint}`, product);
   }
 
   deleteProduct$(id: number): Observable<void> {
