@@ -13,8 +13,8 @@ interface Product {
 })
 export class ProductService {
  
-  private baseUrl = 'https://localhost:7229/';
   private productEndpoint = 'api/Products';
+
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
   };
@@ -25,23 +25,23 @@ export class ProductService {
   ) {}
 
   getProducts$(): Observable<Product[]> {
-    let products = this.http.get<Product[]>(`${this.baseUrl}${this.productEndpoint}`);
+    let products = this.http.get<Product[]>(this.productEndpoint);
     return products;
   }
 
   getProduct$(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}${this.productEndpoint}/${id}`);
+    return this.http.get<Product>(`${this.productEndpoint}/${id}`);
   }
 
   createProduct$(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUrl}${this.productEndpoint}`, product);
+    return this.http.post<Product>(`${this.productEndpoint}`, product);
   }
 
   updateProduct$(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.baseUrl}${this.productEndpoint}`, product);
+    return this.http.put<Product>(`${this.productEndpoint}`, product);
   }
 
   deleteProduct$(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}${this.productEndpoint}/${id}`);
+    return this.http.delete<void>(`${this.productEndpoint}/${id}`);
   }
 }

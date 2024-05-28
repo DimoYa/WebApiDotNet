@@ -9,7 +9,6 @@ namespace MyProduct.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [DisableCors]
     public class ProductsController : ControllerBase
     {
         private readonly AppDbContext _context;

@@ -3,6 +3,7 @@ using MyProduct.Data;
 using MyProduct.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace MyProduct.Web
 {
@@ -13,13 +14,24 @@ namespace MyProduct.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase("InMemoryDb"));
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Add CORS services
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
 
             var app = builder.Build();
 
@@ -45,13 +57,14 @@ namespace MyProduct.Web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-         
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            app.UseStaticFiles(); 
-            app.UseRouting(); 
+            app.UseRouting();
 
-            app.UseCors();
+            // Apply the CORS policy
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthorization();
 
