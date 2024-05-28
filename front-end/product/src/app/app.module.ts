@@ -9,6 +9,8 @@ import { ProductItemComponent } from './features/product/product-item/product-it
 import { provideHttpClient } from '@angular/common/http';
 import { ProductCreateComponent } from './features/product/product-create/product-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './core/header/header.component';
+import { FooterComponent } from './core/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     LandingComponent,
     ProductListComponent,
     ProductItemComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
