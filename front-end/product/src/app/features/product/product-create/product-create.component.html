@@ -1,5 +1,5 @@
 <div class="container my-3">
-  <form [formGroup]="productForm" (submit)="onSubmit()" class="mt-4">
+  <form [formGroup]="productForm" (submit)="createProduct()" class="mt-4">
     <div class="mb-3">
       <label for="name" class="form-label">Name:</label>
       <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter product name">

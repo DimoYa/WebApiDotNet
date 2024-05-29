@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   productForm!: FormGroup;
 
@@ -26,18 +26,23 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.productForm.invalid) {
-      return;
-    }
+  createProduct(): void {
 
-    const formData = this.productForm.value;
-    this.subscription.add(this.productService.createProduct$(formData).subscribe({
-      next: () => {
-        this.router.navigate(['/product-list']);
-        this.productForm.reset();
-      },
-      error: (error) => console.error('Error creating product:', error)
+    const body = this.productForm.value;
+    this.subscription.add(this.productService.createProduct$(body).subscribe(() => {
+      this.router.navigate(['/product-list']);
     }));
+  }
+
+  get f() {
+    return this.productForm.controls;
+  }
+
+  get invalid() {
+    return this.productForm.invalid;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

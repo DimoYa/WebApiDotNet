@@ -11,6 +11,7 @@ import { ProductCreateComponent } from './features/product/product-create/produc
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { ProductUpdateComponent } from './features/product/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './core/footer/footer.component';
     ProductItemComponent,
     ProductCreateComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,
